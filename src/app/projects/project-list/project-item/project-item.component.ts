@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Project } from '../../project.model'
 
 @Component({
   selector: 'app-project-item',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./project-item.component.css']
 })
 export class ProjectItemComponent implements OnInit {
+  @Input() project: Project;
+  @Output() projectSelected = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSelected() {
+    this.projectSelected.emit();
   }
 
 }

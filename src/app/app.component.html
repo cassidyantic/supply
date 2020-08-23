@@ -1,11 +1,9 @@
-
-
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-header></app-header>
-      <app-projects></app-projects>
-      <app-shopping-list></app-shopping-list>
+      <app-projects *ngIf="loadedFeature === 'project'"></app-projects>
+      <app-shopping-list *ngIf="loadedFeature !== 'project'"></app-shopping-list>
     </div>
   </div>
 </div>

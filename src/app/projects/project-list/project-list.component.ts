@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
 
 import { Project } from '../project.model';
 
@@ -8,9 +8,10 @@ import { Project } from '../project.model';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
+  @Output() projectWasSelected = new EventEmitter<Project>();
   projects: Project[] = [
     new Project('A Test Project', 'this is a test', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hotdog_-_Evan_Swigart.jpg/1200px-Hotdog_-_Evan_Swigart.jpg'),
-    new Project('A Test Project', 'this is a test', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hotdog_-_Evan_Swigart.jpg/1200px-Hotdog_-_Evan_Swigart.jpg'),
+    new Project('Another Test Project', 'this is a test', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hotdog_-_Evan_Swigart.jpg/1200px-Hotdog_-_Evan_Swigart.jpg'),
     new Project('A Test Project', 'this is a test', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hotdog_-_Evan_Swigart.jpg/1200px-Hotdog_-_Evan_Swigart.jpg'),
     new Project('A Test Project', 'this is a test', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hotdog_-_Evan_Swigart.jpg/1200px-Hotdog_-_Evan_Swigart.jpg')
   ];
@@ -18,6 +19,10 @@ export class ProjectListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onProjectSelected(project: Project) {
+    this.projectWasSelected.emit(project);
   }
 
 }
