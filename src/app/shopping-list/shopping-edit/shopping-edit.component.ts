@@ -1,5 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Material } from 'src/app/shared/material.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -9,9 +10,8 @@ import { Material } from 'src/app/shared/material.model';
 export class ShoppingEditComponent implements OnInit {
   @ViewChild('nameInput', { static: false }) nameInputRef: ElementRef;
   @ViewChild('amountInput', { static: false }) amountInputRef: ElementRef;
-  @Output() materialAdded = new EventEmitter<Material>();
 
-  constructor() { }
+  constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
   }
@@ -20,7 +20,7 @@ export class ShoppingEditComponent implements OnInit {
     const matName = this.nameInputRef.nativeElement.value;
     const matAmount = this.amountInputRef.nativeElement.value;
     const newMaterial = new Material(matName, matAmount);
-    this.materialAdded.emit(newMaterial);
+    this.slService.addMaterial(newMaterial);
   }
 
 }

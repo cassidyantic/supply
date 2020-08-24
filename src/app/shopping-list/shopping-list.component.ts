@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Material } from '../shared/material.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styles: [
-  ]
+  styles: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
-  materials: Material[] = [
-    new Material('Wood', 7),
-    new Material('Nails', 5),
-  ];
+  materials: Material[];
 
-  constructor() { }
+  constructor(private slService: ShoppingListService) { }
 
-  ngOnInit(): void {
-  }
-
-  onMaterialAdded(material: Material) {
-    this.materials.push(material);
+  ngOnInit() {
+    this.materials = this.slService.getMaterials();
+    this.slService.materialsChanged
+      .subscribe(
+        (materials: Material[]) => {
+          this.materials = materials;
+        }
+      );
   }
 
 }
